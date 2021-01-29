@@ -113,9 +113,15 @@ bool BINPointReader::readNextPoint(){
 			} else if (attribute == PointAttribute::SOURCE_ID) {
 				unsigned short* usBuffer = reinterpret_cast<unsigned short*>(buffer + offset);
 				point.pointSourceID = usBuffer[0];
-			} else if (attribute == PointAttribute::GPS_TIME) {
+			}
+			else if (attribute == PointAttribute::GPS_TIME) {
 				double* dBuffer = reinterpret_cast<double*>(buffer + offset);
 				point.gpsTime = dBuffer[0];
+				// stryx
+			}else if (attribute == PointAttribute::POINT_INDEX) {
+				unsigned long* dBuffer = reinterpret_cast<unsigned long*>(buffer + offset);
+				point.pointIndex = dBuffer[0];
+
 			} else if(attribute == PointAttribute::NORMAL_SPHEREMAPPED){
 				// see http://aras-p.info/texts/CompactNormalStorage.html
 				unsigned char* ucBuffer = reinterpret_cast<unsigned char*>(buffer+offset);

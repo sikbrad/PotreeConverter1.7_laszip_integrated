@@ -24,6 +24,7 @@ void LASPointWriter::write(Point &point){
 	this->point->number_of_returns = point.numberOfReturns;
 	this->point->point_source_ID = point.pointSourceID;
 	this->point->extra_bytes = reinterpret_cast<laszip_U8*>(&point.extraBytes[0]);
+	//this->point->point_index = point.pointIndex;
 	this->point->num_extra_bytes = point.extraBytes.size();
 	
 	laszip_set_point(writer, this->point);

@@ -50,6 +50,7 @@ public:
 	static const PointAttribute NORMAL_SPHEREMAPPED;
 	static const PointAttribute NORMAL_OCT16;
 	static const PointAttribute NORMAL;
+	static const PointAttribute POINT_INDEX;
 
 	int ordinal;
 	string name;

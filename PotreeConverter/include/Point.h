@@ -24,6 +24,7 @@ public:
 	unsigned char numberOfReturns = 0;
 	unsigned short pointSourceID = 0;
 	double gpsTime = 0.0;
+	unsigned long pointIndex = 0;
 	vector<uint8_t> extraBytes;
 
 	Point() = default;

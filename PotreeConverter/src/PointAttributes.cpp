@@ -15,6 +15,7 @@ const PointAttribute PointAttribute::GPS_TIME				= PointAttribute(7, "gps-time",
 const PointAttribute PointAttribute::NORMAL_SPHEREMAPPED	= PointAttribute(8, "NORMAL_SPHEREMAPPED",	ATTRIBUTE_TYPE_INT8, 2, 2);
 const PointAttribute PointAttribute::NORMAL_OCT16			= PointAttribute(9, "NORMAL_OCT16",			ATTRIBUTE_TYPE_INT8, 2, 2);
 const PointAttribute PointAttribute::NORMAL					= PointAttribute(10, "NORMAL",				ATTRIBUTE_TYPE_FLOAT, 3, 12);
+const PointAttribute PointAttribute::POINT_INDEX			= PointAttribute(11, "point-index",			ATTRIBUTE_TYPE_UINT32, 1, 4);
 
 PointAttribute PointAttribute::fromString(string name){
 	if(name == "POSITION_CARTESIAN"){
@@ -37,6 +38,8 @@ PointAttribute PointAttribute::fromString(string name){
 		return PointAttribute::NORMAL_OCT16;
 	}else if(name == "NORMAL"){
 		return PointAttribute::NORMAL;
+	}else if (name == "POINT_INDEX") {
+		return PointAttribute::POINT_INDEX;
 	}
 
 	throw PotreeException("Invalid PointAttribute name: '" + name + "'");

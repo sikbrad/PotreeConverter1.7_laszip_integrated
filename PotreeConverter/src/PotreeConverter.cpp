@@ -56,6 +56,7 @@ PointReader *PotreeConverter::createPointReader(string path, PointAttributes poi
 		reader = new LASPointReader(path);
 	}else if(iEndsWith(path, ".ptx")){
 		reader = new PTXPointReader(path);
+		reader = new PTXPointReader(path);
 	}else if(iEndsWith(path, ".ply")){
 		reader = new PlyPointReader(path);
 	}else if(iEndsWith(path, ".xyz") || iEndsWith(path, ".txt")){
@@ -105,6 +106,7 @@ vector<PointAttribute> checkAvailableStandardAttributes(string file) {
 	bool hasNumberOfReturns = false;
 	bool hasReturnNumber = false;
 	bool hasPointSourceId = false;
+	bool hasPointIndex = false;
 
 	{
 		laszip_BOOL is_compressed = iEndsWith(file, ".laz") ? 1 : 0;
@@ -126,6 +128,8 @@ vector<PointAttribute> checkAvailableStandardAttributes(string file) {
 			hasNumberOfReturns |= point->number_of_returns != 0;
 			hasReturnNumber |= point->return_number != 0;
 			hasPointSourceId |= point->point_source_ID != 0;
+			// 여기서 연산자 대입
+			/*hasPointIndex |= npoints != '\0';*/
 		}
 	}
 
@@ -155,6 +159,12 @@ vector<PointAttribute> checkAvailableStandardAttributes(string file) {
 	if (hasPointSourceId) {
 		attributes.push_back(PointAttribute::SOURCE_ID);
 	}
+	// 대입된 연산자 추가
+	/*if (hasPointIndex) {
+
+		PointAttribute attribute(7, "point-index", "uint64", 1, 8);
+		attributes.push_back(attribute);
+	}*/
 
 	return attributes;
 }
@@ -246,6 +256,7 @@ void PotreeConverter::prepare(){
 			sourceFiles.push_back(source);
 		}
 	}
+	// Vector<string> <-- 경로들
 	this->sources = sourceFiles;
 
 	pointAttributes = PointAttributes();
@@ -253,6 +264,7 @@ void PotreeConverter::prepare(){
 
 	bool addExtraAttributes = false;
 
+	// 이건 왜 지정되있는지 이해안댐 애초에 선언만해놓고 아무것도 없는상태라 당연히 이 코드는 동작을 안함
 	if(outputAttributes.size() > 0){
 		for(const auto &attribute : outputAttributes){
 			if(attribute == "RGB"){
@@ -271,15 +283,25 @@ void PotreeConverter::prepare(){
 				pointAttributes.add(PointAttribute::GPS_TIME);
 			} else if(attribute == "NORMAL"){
 				pointAttributes.add(PointAttribute::NORMAL_OCT16);
-			} else if (attribute == "EXTRA") {
+			}else if (attribute == "POINT_INDEX") {
+				pointAttributes.add(PointAttribute::POINT_INDEX);
+			}else if (attribute == "EXTRA") {
 				addExtraAttributes = true;
 			}
 		} 
 	} else {
+		// file의 최초경로를 가져옴
 		string file = sourceFiles[0];
 
 		// always add colors?
+		// 위 주석은 왜 달아놓은지 모르겠으나 말하는대로 컬러에 대한 속성을 부여함
 		pointAttributes.add(PointAttribute::COLOR_PACKED);
+
+		// 여기서 새로만든 포인트인덱스 속성을 부여함 이는 파트리뷰어에 그대로 적용됨
+		// 이 뷰어가 적용되려면 몇가지 해두어야 할 것이 있는데
+		// 이 AttributeClass를 따라가면 해당 클래스에 이것저것 정의를 할 수 있다.
+		// 정의된 클래스는
+		pointAttributes.add(PointAttribute::POINT_INDEX);
 
 		vector<PointAttribute> attributes = checkAvailableStandardAttributes(file);
 
@@ -448,7 +470,7 @@ void PotreeConverter::generatePage(string name){
 	//	fSettings.close();
 	//}
 }
-
+// sources.json 영역
 void writeSources(string path, vector<string> sourceFilenames, vector<int> numPoints, vector<AABB> boundingBoxes, string projection){
 	Document d(rapidjson::kObjectType);
 
@@ -626,10 +648,13 @@ void PotreeConverter::convert(){
 			continue;
 		}
 
+		unsigned int _vPointCounter = 0;
+
 		while(reader->readNextPoint()){
 			pointsProcessed++;
 
 			Point p = reader->getPoint();
+			p.pointIndex = _vPointCounter;
 			writer->add(p);
 
 			if((pointsProcessed % (1'000'000)) == 0){
@@ -675,7 +700,9 @@ void PotreeConverter::convert(){
 			//if(pointsProcessed >= 10'000'000){
 			//	break;
 			//}
+			_vPointCounter++;
 		}
+
 		reader->close();
 		delete reader;
 

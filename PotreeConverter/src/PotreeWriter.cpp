@@ -8,6 +8,7 @@
 #include <iomanip>
 
 #include <filesystem>
+#include <bitset>
 
 #include "AABB.h"
 #include "SparseGrid.h"
@@ -308,6 +309,7 @@ void PWNode::flush(){
 			writer = createWriter(filepath);
 		}
 
+		// 여기서 검증하는거같음
 		for(auto &e_c : points){
 			writer->write(e_c);
 		}
@@ -552,6 +554,8 @@ void PotreeWriter::processStore(){
 			}
 		}
 	});
+
+	//std::cout << "SIZE : " << numAccepted << std::endl;
 }
 
 void PotreeWriter::flush(){
@@ -717,8 +721,9 @@ void PotreeWriter::loadStateFromDisk(){
 				unsigned int* ip = reinterpret_cast<unsigned int*>(p);
 				unsigned int numPoints = *ip;
 
-				//std::bitset<8> bs(children);
-				//cout << i << "\t: " << "children: " << bs << "; " << "numPoints: " << numPoints << endl;
+				// 와드 (부활)
+				std::bitset<8> bs(children);
+				cout << i << "\t: " << "children: " << bs << "; " << "numPoints: " << numPoints << endl;
 
 				current->numAccepted = numPoints;
 

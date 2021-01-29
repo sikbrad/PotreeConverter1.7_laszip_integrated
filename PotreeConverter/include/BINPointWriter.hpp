@@ -78,6 +78,9 @@ public:
 				writer->write((const char*)&point.pointSourceID, sizeof(unsigned short));
 			} else if (attribute == PointAttribute::GPS_TIME) {
 				writer->write((const char*)&point.gpsTime, sizeof(double));
+				// 여기 추가된 부분
+			} else if (attribute == PointAttribute::POINT_INDEX) {
+				writer->write((const char*)&point.pointIndex, sizeof(unsigned long));
 			} else if(attribute == PointAttribute::NORMAL_SPHEREMAPPED){
 				// see http://aras-p.info/texts/CompactNormalStorage.html
 				float nx = point.normal.x;
