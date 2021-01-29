@@ -29,17 +29,17 @@ Clion으로 안되는부분은 VS solution 사용하니 참고.
 
 - Clion에서 플젝을 연다
 
-- - ![image-20210129190116503](F:\Dev\Pocla\PotreeConvExperiments\PotreeConvertGit2\PotreeConverter170_laszip_integrated\assets\README_CLION_GUIDE\image-20210129190116503.png)
+- - ![image-20210129190116503](.\assets\README_CLION_GUIDE\image-20210129190116503.png)
   - 이렇게 열거나, 아니면 open 할때 경로에      cmakeList가 있으면 알아서 open as cmake project 할건지 물어볼것이다.
 
 - 툴체인을 64비트로 설정한다
 
 - - 플젝 설정화면에서 Ctrl Alt S 눌러서 설정화면 들어간다
-  - ![image-20210129190130794](F:\Dev\Pocla\PotreeConvExperiments\PotreeConvertGit2\PotreeConverter170_laszip_integrated\assets\README_CLION_GUIDE\image-20210129190130794.png)
+  - ![image-20210129190130794](.\assets\README_CLION_GUIDE\image-20210129190130794.png)
 
 - 릴리즈모드를 추가한다
 
-- - ![image-20210129190143411](F:\Dev\Pocla\PotreeConvExperiments\PotreeConvertGit2\PotreeConverter170_laszip_integrated\assets\README_CLION_GUIDE\image-20210129190143411.png)
+- - ![image-20210129190143411](.\assets\README_CLION_GUIDE\image-20210129190143411.png)
   - 플러스 버튼 누르면 알아서 잡는다.
 
 - 경로를 수정한다
@@ -50,7 +50,7 @@ Clion으로 안되는부분은 VS solution 사용하니 참고.
 
 - 빌드한다
 
-- - ![image-20210129190155655](F:\Dev\Pocla\PotreeConvExperiments\PotreeConvertGit2\PotreeConverter170_laszip_integrated\assets\README_CLION_GUIDE\image-20210129190155655.png)
+- - ![image-20210129190155655](.\assets\README_CLION_GUIDE\image-20210129190155655.png)
 
 - 빌드가 성공하면 
 
@@ -59,7 +59,7 @@ Clion으로 안되는부분은 VS solution 사용하니 참고.
 
 - Troubleshooting
 
-- - ![image-20210129190210076](F:\Dev\Pocla\PotreeConvExperiments\PotreeConvertGit2\PotreeConverter170_laszip_integrated\assets\README_CLION_GUIDE\image-20210129190210076.png)
+- - ![image-20210129190210076](.\assets\README_CLION_GUIDE\image-20210129190210076.png)
   - 한글 깨지는 경우 project 언어설정을 949로 수정할 것.
 
 
