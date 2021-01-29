@@ -4,7 +4,7 @@ REM mkdir ExtLibs
 REM git clone https://github.com/LAStools/LAStools ./ExtLibs/LAStools
 
 set CURR_DIR=%cd%
-set EXTLIB_NAME=ExtLibs_auto
+set EXTLIB_NAME=ExtLibs_provisioned
 
 mkdir %CURR_DIR%\%EXTLIB_NAME%
 mkdir %CURR_DIR%\%EXTLIB_NAME%\LAStools
