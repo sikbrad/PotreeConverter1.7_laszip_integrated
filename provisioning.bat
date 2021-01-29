@@ -1,8 +1,4 @@
 @echo ON
-:: clone Lastools
-REM mkdir ExtLibs
-REM git clone https://github.com/LAStools/LAStools ./ExtLibs/LAStools
-
 set CURR_DIR=%cd%
 set EXTLIB_NAME=ExtLibs_provisioned
 
@@ -12,7 +8,7 @@ mkdir %CURR_DIR%\%EXTLIB_NAME%\LAStools
 :: build lastools (or do it in clion)
 cd %CURR_DIR%\%EXTLIB_NAME%\LAStools
 git clone https://github.com/m-schuetz/LAStools.git master
-cd master/LASzip
+cd %CURR_DIR%\%EXTLIB_NAME%\LAStools\master\LASzip
 mkdir build
 cd build
 cmake ../
@@ -25,7 +21,7 @@ set LASZIP_LIBRARY=%CURR_DIR%\%EXTLIB_NAME%\LAStools\master\LASzip\build\src\Rel
 :: checkout PotreeConverter
 cd %CURR_DIR%
 mkdir build
-cd build
+cd %CURR_DIR%\build
 
 :: Visual Studio project
 cmake -DLASZIP_INCLUDE_DIRS=%LASZIP_INCLUDE_DIRS% -DLASZIP_LIBRARY=%LASZIP_LIBRARY%  ../

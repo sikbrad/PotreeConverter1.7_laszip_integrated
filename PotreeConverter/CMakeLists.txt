@@ -3,6 +3,15 @@ project(PotreeConverter)
 set(RAPIDJSON_INCLUDE_DIR lib/rapidjson/include)
 set(ARGUMENTS_INCLUDE_DIR lib/arguments)
 
+## gq starts
+set(CMAKE_CXX_STANDARD 17)
+set(POTREE_PROJ_DIR F:/Dev/Pocla/PotreeConvExperiments/PotreeConvertGit2/PotreeConverter170_laszip_integrated)
+set(LASZIP_DIR ${POTREE_PROJ_DIR}/ExtLibs_provisioned/LAStools/master/LASzip)
+
+set(LASZIP_INCLUDE_DIRS ${LASZIP_DIR}/dll)
+set(LASZIP_LIBRARY ${LASZIP_DIR}/build/src/Release/laszip.lib)
+## gq ends
+
 file(GLOB_RECURSE files src/*.cpp include/*.h include/*.hpp )
 file(GLOB_RECURSE lib_rapidjson_files ${RAPIDJSON_INCLUDE_DIR}/* )
 file(GLOB_RECURSE lib_argument_files ${ARGUMENTS_INCLUDE_DIR}/* )
