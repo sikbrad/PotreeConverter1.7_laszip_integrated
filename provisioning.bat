@@ -11,7 +11,7 @@ mkdir %CURR_DIR%\%EXTLIB_NAME%\LAStools
 
 :: build lastools (or do it in clion)
 cd %CURR_DIR%\%EXTLIB_NAME%\LAStools
-git clone https://github.com/LAStools/LAStools master
+git clone https://github.com/m-schuetz/LAStools.git master
 cd master/LASzip
 mkdir build
 cd build
